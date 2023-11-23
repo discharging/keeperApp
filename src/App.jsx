@@ -5,6 +5,16 @@ import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import { Audio } from "react-loader-spinner";
+import { Box, Modal } from "@mui/material";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -60,15 +70,24 @@ function App() {
       <Header />
       <CreateArea onAdd={addNote} />
       {isSubmitting && (
-        <Audio
-          height="80"
-          width="80"
-          radius="9"
-          color="green"
-          ariaLabel="three-dots-loading"
-          wrapperStyle
-          wrapperClass
-        />
+        <Modal
+          open={isSubmitting}
+          onClose={isSubmitting}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Audio
+              height="80"
+              width="80"
+              radius="9"
+              color="green"
+              ariaLabel="three-dots-loading"
+              wrapperStyle
+              wrapperClass
+            />
+          </Box>
+        </Modal>
       )}
       <div className="notes">
         {notes.map((noteItem, index) => {

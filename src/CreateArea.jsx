@@ -3,6 +3,17 @@ import AddIcon from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import { Audio } from "react-loader-spinner";
+import { Box, Modal } from "@mui/material";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
 
 function CreateArea(props) {
   const [isExtended, setExtended] = useState(false);
@@ -57,15 +68,24 @@ function CreateArea(props) {
     <div>
       <form className="create-note">
         {isSubmitting && (
-          <Audio
-            height="80"
-            width="80"
-            radius="9"
-            color="green"
-            ariaLabel="three-dots-loading"
-            wrapperStyle
-            wrapperClass
-          />
+          <Modal
+            open={isSubmitting}
+            onClose={isSubmitting}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Audio
+                height="80"
+                width="80"
+                radius="9"
+                color="green"
+                ariaLabel="three-dots-loading"
+                wrapperStyle
+                wrapperClass
+              />
+            </Box>
+          </Modal>
         )}
         {isExtended ? (
           <input
