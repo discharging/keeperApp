@@ -98,6 +98,7 @@ function App() {
               title={noteItem.title}
               content={noteItem.content}
               onDelete={deleteNote}
+              onAdd={addNote}
             />
           );
         })}
