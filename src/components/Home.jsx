@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import { Audio } from "react-loader-spinner";
 import { Box, Modal } from "@mui/material";
+import UserContext from "../context/UserContext";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -16,7 +18,7 @@ const style = {
 };
 
 function Home() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useContext(UserContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function addNote() {
@@ -42,10 +44,6 @@ function Home() {
       console.log(error);
     }
   }
-  useEffect(() => {
-    // Call the fetchData function
-    fetchData();
-  }, []); // The empty dependency array ensures that this effect runs once on component mount
 
   // Function to fetch data from MongoDB via your backend API
   const fetchData = async () => {

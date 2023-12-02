@@ -6,7 +6,10 @@ export const AuthContextProvider = ({ children }) => {
   const [currentToken, setCurrentToken] = useState({
     token: JSON.parse(localStorage.getItem("token")) || null,
   });
-
+  const logout = () => {
+    localStorage.removeItem("token");
+    return true;
+  };
   const login = async (inputs) => {
     try {
       const response = await fetch("http://localhost:3001/login", {
@@ -24,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
       localStorage.setItem("token", JSON.stringify(data));
 
       setCurrentToken(data);
-
+      return data.newUser;
       // Navigate to "/" once login is successful
     } catch (error) {
       console.error("Error during login:", error.message);
@@ -33,7 +36,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentToken, login }}>
+    <AuthContext.Provider value={{ currentToken, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
