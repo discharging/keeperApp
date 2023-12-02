@@ -31,13 +31,16 @@ function Home() {
       return;
     }
     try {
-      await fetch(`http://localhost:3001/notes/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
+      await fetch(
+        `https://keeperappapi-production.up.railway.app/notes/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       fetchData();
     } catch (error) {
@@ -50,13 +53,16 @@ function Home() {
     const token = JSON.parse(localStorage.getItem("token")).token;
     try {
       setIsSubmitting(true);
-      const response = await fetch("http://localhost:3001/notes", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://keeperappapi-production.up.railway.app/notes",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

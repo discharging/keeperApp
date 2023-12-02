@@ -44,20 +44,22 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log(userData);
     try {
-      const response = await fetch("http://localhost:3001/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        "https://keeperappapi-production.up.railway.app/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const jsonData = await response.json();
-      console.log(jsonData);
+      console.log("Registerd successfully");
       navigate("/login");
     } catch (error) {
       console.error("Error fetching data:", error);

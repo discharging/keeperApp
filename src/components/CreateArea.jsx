@@ -40,14 +40,17 @@ function CreateArea(props) {
     event.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("http://localhost:3001/notes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(note),
-      });
+      const response = await fetch(
+        "https://keeperappapi-production.up.railway.app/notes",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(note),
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
