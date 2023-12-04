@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ width: "100%" }}>
+      <AppBar position="static" sx={{ width: "100%", background: "#4ef169" }}>
         <Toolbar
           sx={{
             display: "flex",
@@ -34,11 +34,12 @@ export default function Header() {
           <button
             onClick={handleLogout}
             style={{
-              background: "black",
-              color: "blue",
+              background: "gray",
+              color: "white",
               border: "none",
               padding: "5px",
               cursor: "pointer",
+              borderRadius: "5px",
             }}
           >
             Logout

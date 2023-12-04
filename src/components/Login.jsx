@@ -15,15 +15,16 @@ import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" color="#4ef169" align="center" {...props}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link
+        style={{
+          color: "#4ef169",
+          textDecoration: "none",
+        }}
+        href="https://mui.com/"
+      >
+        Keeprer App
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -66,7 +67,7 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#4ef169" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -101,18 +102,38 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                background: "#4ef169",
+                "&:hover": {
+                  background: "green",
+                },
+              }}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link
+                  href="#"
+                  variant="body2"
+                  style={{
+                    color: "#4ef169",
+                  }}
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/register">Register</Link>
+                <Link
+                  to="/register"
+                  style={{
+                    color: "#4ef169",
+                  }}
+                >
+                  Register
+                </Link>
               </Grid>
             </Grid>
           </Box>
