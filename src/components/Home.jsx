@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import { Audio } from "react-loader-spinner";
 import { Box, Modal } from "@mui/material";
-import UserContext from "../context/UserContext";
 
 const style = {
   position: "absolute",
@@ -18,9 +17,8 @@ const style = {
 };
 
 function Home() {
-  const [notes, setNotes] = useContext(UserContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [notes, setNotes] = useState([]);
   function addNote() {
     fetchData();
   }
@@ -74,6 +72,9 @@ function Home() {
       setIsSubmitting(false);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>

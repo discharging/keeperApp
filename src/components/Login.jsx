@@ -12,7 +12,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../context/UserContext";
 
 function Copyright(props) {
   return (
@@ -37,11 +36,10 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const [, setNotes] = useContext(UserContext);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const userDate = {
@@ -49,8 +47,7 @@ export default function SignIn() {
       password: data.get("password"),
     };
     try {
-      const user = await login(userDate);
-      setNotes(user.notes);
+      login(userDate);
       navigate("/");
     } catch (err) {
       console.log(err);
