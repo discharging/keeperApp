@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import { Audio } from "react-loader-spinner";
 import { Box, Modal } from "@mui/material";
+import { AuthContext } from "../context/AuthContext";
 
 const style = {
   position: "absolute",
@@ -17,6 +18,7 @@ const style = {
 };
 
 function Home() {
+  const { setCurrentToken } = useContext(AuthContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notes, setNotes] = useState([]);
   function addNote() {
@@ -73,7 +75,12 @@ function Home() {
     }
   };
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      setCurrentToken(token);
+    }
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

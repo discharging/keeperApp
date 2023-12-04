@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -6,12 +6,7 @@ export const AuthContextProvider = ({ children }) => {
   const [currentToken, setCurrentToken] = useState({
     token: JSON.parse(localStorage.getItem("token")) || null,
   });
-  useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
-      setCurrentToken(token);
-    }
-  }, []);
+
   const logout = () => {
     localStorage.removeItem("token");
     return true;
@@ -34,8 +29,8 @@ export const AuthContextProvider = ({ children }) => {
       const data = await response.json();
 
       localStorage.setItem("token", JSON.stringify(data));
-
       setCurrentToken(data);
+
       return data.newUser;
       // Navigate to "/" once login is successful
     } catch (error) {
@@ -45,7 +40,9 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentToken, login, logout }}>
+    <AuthContext.Provider
+      value={{ currentToken, setCurrentToken, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

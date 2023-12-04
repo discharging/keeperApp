@@ -10,6 +10,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Modal } from "@mui/material";
+import { Audio } from "react-loader-spinner";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+};
 
 function Copyright(props) {
   return (
@@ -36,7 +49,9 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const handleSubmit = async (event) => {
+    setIsSubmitting(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -62,6 +77,7 @@ export default function SignUp() {
       }
       const jsonData = await response.json();
       console.log("Registerd successfully");
+      setIsSubmitting(false);
       navigate("/login");
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -70,6 +86,26 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      {isSubmitting && (
+        <Modal
+          open={isSubmitting}
+          onClose={isSubmitting}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Audio
+              height="80"
+              width="80"
+              radius="9"
+              color="green"
+              ariaLabel="three-dots-loading"
+              wrapperStyle
+              wrapperClass
+            />
+          </Box>
+        </Modal>
+      )}
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
