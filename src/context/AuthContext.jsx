@@ -14,7 +14,7 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (inputs) => {
     try {
       const response = await fetch(
-        "https://keeperappapi-production.up.railway.app/login",
+        "https://keeperappapi-production.up.railway.app/user/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

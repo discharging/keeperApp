@@ -63,7 +63,7 @@ export default function SignUp() {
     };
     try {
       const response = await fetch(
-        "https://keeperappapi-production.up.railway.app/register",
+        "https://keeperappapi-production.up.railway.app/user/register",
         {
           method: "POST",
           headers: {
